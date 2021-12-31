@@ -18,7 +18,7 @@ def home():
 
 @app.route("/<topic>")
 def get(topic):
-    return json.loads(knowledgeProcess(sentence=topic))
+    return knowledgeProcess(sentence=topic)
 
 def knowledgeProcess(sentence=None):
 
