@@ -22,20 +22,23 @@ def get(topic):
 
 def knowledgeProcess(sentence=None):
 
-    wikipedia_data = wikipediaGet(topic=sentence)
+    try:
+        wikipedia_data = wikipediaGet(topic=sentence)
 
-    if wikipedia_data:
-        #if we have wikipedia data
-        return {"status": "ok", "data": wikipedia_data}
+        if wikipedia_data:
+            #if we have wikipedia data
+            return {"status": "ok", "data": wikipedia_data}
 
-    else:
-        #try duckduckgo before quitting
-
-        duck_sentence_data = duckGetSentence(sentence=sentence)
-        if duck_sentence_data:
-            return {"status": "ok", "data": duck_sentence_data}
         else:
-            return {"status": "ok", "data": "I did not find anything about that"}
+            #try duckduckgo before quitting
+
+            duck_sentence_data = duckGetSentence(sentence=sentence)
+            if duck_sentence_data:
+                return {"status": "ok", "data": duck_sentence_data}
+            else:
+                return {"status": "ok", "data": "I did not find anything about that"}
+    except:
+        return {"status": "error"}
 
 def wikipediaGet(topic=None):
     try:
